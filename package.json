@@ -1,0 +1,26 @@
+{
+  "name": "sabebnotes",
+  "version": "1.0.0",
+  "description": "Project notes for users",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/winnstonn/sabebnotes.git"
+  },
+  "author": "DCP + Winston",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/winnstonn/sabebnotes/issues"
+  },
+  "homepage": "https://github.com/winnstonn/sabebnotes#readme",
+  "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
