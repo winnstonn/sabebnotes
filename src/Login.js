@@ -1,4 +1,7 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import './assets/css/login.css';
+
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -46,7 +49,7 @@ export default class Login extends React.Component {
 
                 <label>Password</label>
                 <input type="password" onChange={this.handlePassChange.bind(this)} />
-                <button type="submit" form="login-form">Sign in</button>
+                <Button type="submit" form="login-form" children="Sign in" color="#ffffff"/>
                 </form>
             </div>
         )
