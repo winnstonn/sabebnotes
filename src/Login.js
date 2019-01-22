@@ -1,12 +1,27 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
 import TextField from '@material-ui/core/TextField';
-import './assets/css/login.css';
-import { Card, CardHeader } from '@material-ui/core';
+import posed, { PoseGroup } from 'react-pose';
+import { Card } from '@material-ui/core';
+import { Link, Router, Location } from '@reach/router';
+import Homepage from './Homepage';
 
-import PrimarySearchAppBar from './Navbar';
-import axios from 'axios';
+const RouteContainer = posed.div({
+  enter: { opacity: 1, delay: 300, beforeChildren: 300 },
+  exit: { opacity: 0 }
+});
+
+const PosedRouter = ({ children }) => (
+  <Location>
+    {({ location }) => (
+      <PoseGroup>
+        <RouteContainer key={location.key}>
+          <Router location={location}>{children}</Router>
+        </RouteContainer>
+      </PoseGroup>
+    )}
+  </Location>
+);
 
 export default class Login extends React.Component {
 
@@ -15,8 +30,8 @@ export default class Login extends React.Component {
         this.state = {
             username: '',
             password: '',
-            error:'',
-            redirect: false
+            error:'', firstname:'', lastname:'',
+			email:''
         };
     }
 
@@ -30,9 +45,6 @@ export default class Login extends React.Component {
         if (!this.state.password) {
           return this.setState({ error: 'Password is required' });
         }
-
-		// Buat nyoba redirect tapi masih gabs
-		axios.post(/**/).then(() => this.setState({ redirect: true }));
 
 		return this.setState({ error: '' });
     }
@@ -50,18 +62,19 @@ export default class Login extends React.Component {
     }
 
     render() {
-		// Buat redirect
-		//if (this.state.redirect) {
-			//return <Redirect to='./Homepage'/>;
-		//}
-
         return (
-            <div>
+          <div>
+		  <nav>
+			<Link to="/homepage">Homepage</Link>
+		  </nav>
+		  <PosedRouter>
+			<Homepage path="/homepage" />
+		  </PosedRouter>
             <Card style={{
                 width:"fit-content",
                 margin: 'auto',
                 opacity: 0.8,
-                marginTop: '30vh',
+                marginTop: '15vh',
                 
                 }}>
                 <div style={{
@@ -72,12 +85,11 @@ export default class Login extends React.Component {
                 <form onSubmit= {this.handleSubmit.bind(this)} id="login-form">
                 <TextField
                     label="Username"
-                    placeholder="ilhamlovewinston"
+                    placeholder="ilhamlovenads"
                     required
                     value={this.state.username}
                 />
                 <br/>
-
                 <TextField
                     label="Password"
                     placeholder="winstonneverdie"
@@ -133,6 +145,7 @@ export default class Login extends React.Component {
                 <br/>
                 <TextField
                     label="Email"
+					placeholder="sayakamu@gmail.com"
                     required
                     value={this.state.email}
                 />
@@ -162,8 +175,6 @@ export default class Login extends React.Component {
                 </form>
                 </div>
             </Card>
-
-
             </div>
             
         )
