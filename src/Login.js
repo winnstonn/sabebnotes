@@ -5,14 +5,18 @@ import TextField from '@material-ui/core/TextField';
 import './assets/css/login.css';
 import { Card, CardHeader } from '@material-ui/core';
 
+import PrimarySearchAppBar from './Navbar';
+import axios from 'axios';
 
 export default class Login extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
             username: '',
             password: '',
-            error:''
+            error:'',
+            redirect: false
         };
     }
 
@@ -26,8 +30,11 @@ export default class Login extends React.Component {
         if (!this.state.password) {
           return this.setState({ error: 'Password is required' });
         }
-    
-        return this.setState({ error: '' });
+
+		// Buat nyoba redirect tapi masih gabs
+		axios.post(/**/).then(() => this.setState({ redirect: true }));
+
+		return this.setState({ error: '' });
     }
 
     handleUserChange(evt) {
@@ -43,6 +50,11 @@ export default class Login extends React.Component {
     }
 
     render() {
+		// Buat redirect
+		//if (this.state.redirect) {
+			//return <Redirect to='./Homepage'/>;
+		//}
+
         return (
             <div>
             <Card style={{
