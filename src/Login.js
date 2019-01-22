@@ -1,14 +1,17 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import './assets/css/login.css';
-
+import PrimarySearchAppBar from './Navbar';
+import axios from 'axios';
 
 export default class Login extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            redirect: false
         };
     }
 
@@ -22,8 +25,11 @@ export default class Login extends React.Component {
         if (!this.state.password) {
           return this.setState({ error: 'Password is required' });
         }
-    
-        return this.setState({ error: '' });
+
+		// Buat nyoba redirect tapi masih gabs
+		axios.post(/**/).then(() => this.setState({ redirect: true }));
+
+		return this.setState({ error: '' });
     }
 
     handleUserChange(evt) {
@@ -39,8 +45,14 @@ export default class Login extends React.Component {
     }
 
     render() {
+		// Buat redirect
+		//if (this.state.redirect) {
+			//return <Redirect to='./Homepage'/>;
+		//}
+
         return (
             <div className="Login">
+				<PrimarySearchAppBar/>
                 <form onSubmit= {this.handleSubmit.bind(this)} id="login-form">
                 <h3>{this.state.error}</h3>
 

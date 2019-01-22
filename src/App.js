@@ -1,19 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Login from './Login';
 
 class App extends React.Component {
-   render() {
-      return (
-			<Login/>
-		)
-   }
-}
-
-class Home extends React.Component {
 	render() {
 		return (
-			<p>Home</p>
+		<div>
+			<h1>Welcome to The Notes</h1>
+			<Login/>
+		</div>
 		);
 	}
 }
