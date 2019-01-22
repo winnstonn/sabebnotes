@@ -1,6 +1,9 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import TextField from '@material-ui/core/TextField';
 import './assets/css/login.css';
+import { Card, CardHeader } from '@material-ui/core';
 
 
 export default class Login extends React.Component {
@@ -8,7 +11,8 @@ export default class Login extends React.Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            error:''
         };
     }
 
@@ -40,18 +44,116 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <div className="Login">
+            <div>
+            <Card style={{
+                width:"fit-content",
+                margin: 'auto',
+                opacity: 0.8,
+                marginTop: '30vh',
+                
+                }}>
+                <div style={{
+                    float: "left",
+                    width: "fit-content"
+                }}>
+                <h2>Login</h2>
                 <form onSubmit= {this.handleSubmit.bind(this)} id="login-form">
-                <h3>{this.state.error}</h3>
+                <TextField
+                    label="Username"
+                    placeholder="ilhamlovewinston"
+                    required
+                    value={this.state.username}
+                />
+                <br/>
 
-                <label>Username</label>
-                <input type="text" onChange={this.handleUserChange.bind(this)} />
+                <TextField
+                    label="Password"
+                    placeholder="winstonneverdie"
+                    type="password"
+                    required
+                    value={this.state.password}
+                    style={{
+                        margin: "25px"
+                    }}
+                />
+                <br/>
+                <Button 
+                type="submit" 
+                form="login-form" 
+                children="Login" 
+                style={{
+                    backgroundColor: "#41f4c1",
+                    margin: "25px"
 
-                <label>Password</label>
-                <input type="password" onChange={this.handlePassChange.bind(this)} />
-                <Button type="submit" form="login-form" children="Sign in" color="#ffffff"/>
+                }} />
                 </form>
+                </div>
+
+                <div style={{
+                    float: "left",
+                    width: "fit-content",
+                    position: "relative",
+                    marginTop: "40%",
+                    marginLeft: "25px",
+                    marginRight: "25px"
+                }}>
+                    <strong>or</strong>
+                </div>
+                <div style={{
+                    float: "left",
+                    marginLeft: "25px",
+                    marginRight: "25px",
+                    width: "fit-content"
+                }}>
+                <h2>Sign up</h2>
+                <form onSubmit= {this.handleSubmit.bind(this)} id="signup-form">
+                <TextField
+                    label="First name"
+                    required
+                    value={this.state.firstname}
+                />
+                <br/>
+                <TextField
+                    label="Last name"
+                    required
+                    value={this.state.lastname}
+                />
+                <br/>
+                <TextField
+                    label="Email"
+                    required
+                    value={this.state.email}
+                />
+                <br/>
+                <TextField
+                    label="Username"
+                    required
+                    value={this.state.username}
+                />
+                <br/>
+                <TextField
+                    label="Password"
+                    type="password"
+                    required
+                    value={this.state.password}
+                />
+                <br/>
+                <Button 
+                type="submit" 
+                form="signup-form" 
+                children="Sign up" 
+                style={{
+                    backgroundColor: "#41f4c1",
+                    margin: "25px"
+
+                }} />
+                </form>
+                </div>
+            </Card>
+
+
             </div>
+            
         )
     }
 }
