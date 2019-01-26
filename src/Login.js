@@ -4,10 +4,11 @@ import TextField from '@material-ui/core/TextField';
 import posed, { PoseGroup } from 'react-pose';
 import { Card } from '@material-ui/core';
 import { Link, Router, Location } from '@reach/router';
-import Homepage from './Homepage';
+import { Redirect } from 'react-router';
+//import Homepage from './Homepage';
 
-const RouteContainer = posed.div({
-  enter: { opacity: 1, delay: 300, beforeChildren: 300 },
+//const RouteContainer = posed.div({
+/*   enter: { opacity: 1, delay: 300, beforeChildren: 300 },
   exit: { opacity: 0 }
 });
 
@@ -21,7 +22,7 @@ const PosedRouter = ({ children }) => (
       </PoseGroup>
     )}
   </Location>
-);
+); */
 
 export default class Login extends React.Component {
 
@@ -31,7 +32,7 @@ export default class Login extends React.Component {
             username: '',
             password: '',
             error:'', firstname:'', lastname:'',
-			email:''
+			email:'', redir:false
         };
     }
 
@@ -45,7 +46,7 @@ export default class Login extends React.Component {
         if (!this.state.password) {
           return this.setState({ error: 'Password is required' });
         }
-
+		this.setState(() => ({ redir: true }));
 		return this.setState({ error: '' });
     }
 
@@ -62,14 +63,17 @@ export default class Login extends React.Component {
     }
 
     render() {
+/* 		if (this.state.redir == true) {
+			return <Redirect to= "/Homepage" />
+		} */
         return (
           <div>
-		  <nav>
+/*		  <nav>
 			<Link to="/homepage">Homepage</Link>
 		  </nav>
 		  <PosedRouter>
 			<Homepage path="/homepage" />
-		  </PosedRouter>
+		  </PosedRouter>*/
             <Card style={{
                 width:"fit-content",
                 margin: 'auto',
