@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { Card } from '@material-ui/core';
+import axios from 'axios';
 
 export default class Login extends React.Component {
 
@@ -17,6 +18,7 @@ export default class Login extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        const apiUrl = 'localhost:8000/api/auth_login'
 
         if (!this.state.username) {
           return this.setState({ error: 'Username is required' });
@@ -25,7 +27,16 @@ export default class Login extends React.Component {
         if (!this.state.password) {
           return this.setState({ error: 'Password is required' });
         }
-		return this.setState({ error: '' });
+        axios.post(apiUrl, this.state.username, this.state.password).then(
+            response => {
+                if (response.data === true){
+                    this.props.history.push('/homepage');
+                }
+                else {
+                    return this.setState({error: 'wrong username or password'});
+                }
+            }
+        );
     }
 
     handleUserChange(evt) {
@@ -62,6 +73,7 @@ export default class Login extends React.Component {
                     placeholder="ilhamlovenads"
                     required
                     value={this.state.username}
+                    onChange={this.handleUserChange.bind(this)}
                 />
                 <br/>
                 <TextField
@@ -70,6 +82,7 @@ export default class Login extends React.Component {
                     type="password"
                     required
                     value={this.state.password}
+                    onChange={this.handlePassChange.bind(this)}
                     style={{
                         margin: "25px"
                     }}
@@ -127,14 +140,12 @@ export default class Login extends React.Component {
                 <TextField
                     label="Username"
                     required
-                    value={this.state.username}
                 />
                 <br/>
                 <TextField
                     label="Password"
                     type="password"
                     required
-                    value={this.state.password}
                 />
                 <br/>
                 <Button 

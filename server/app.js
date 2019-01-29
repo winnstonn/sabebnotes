@@ -1,4 +1,6 @@
 const express = require('express');
+const cors = require('cors');
+app.use(cors());
 const app = express();
 const port = process.env.PORT || 8000;
 const bodyParser = require('body-parser');
@@ -6,7 +8,7 @@ const authLogin = require('./routes/auth_login');
 
 app.use(bodyParser.json());
 
-app.get('/api/auth_login', function(req, res) {
+app.post('/api/auth_login', function(req, res) {
     authLogin(req, res);
 })
 .get('/', function(req, res) {
