@@ -1,14 +1,15 @@
 import React from 'react';
-import Routing from './routing';
+import Login from './Login';
+import { withRouter } from "react-router-dom";
 
 class App extends React.Component {
 	render() {
 		return (
 		<div>
-			<Routing />
+			<Login />
 		</div>
 		);
 	}
 }
 
-export default App;
+export default withRouter(App);

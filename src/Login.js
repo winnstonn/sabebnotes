@@ -1,11 +1,11 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { Card } from '@material-ui/core';
 import axios from 'axios';
 import Homepage from './Homepage';
-import { Redirect } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
 
 export default class Login extends React.Component {
 
@@ -15,9 +15,10 @@ export default class Login extends React.Component {
             username: '',
             password: '',
             error:'', firstname:'', lastname:'',
-			email:'', redirect:false
+			email:'', redir:false
         };
     }
+
 
     handleSubmit(event) {
         event.preventDefault();
@@ -30,19 +31,18 @@ export default class Login extends React.Component {
         if (!this.state.password) {
           return this.setState({ error: 'Password is required' });
         }
-
-		return this.setState({ redirect: true });
-        axios.post(apiUrl, {username: this.state.username, password: this.state.password}).then(
+		return this.setState({ redir: true });
+        /* axios.post(apiUrl, {username: this.state.username, password: this.state.password}).then(
             response => {
                 console.log(response.data);
                 if (response.data.authorized === true){
-                    return <Redirect from='/' to='/homepage'/>
+                    return <Router><Redirect to='/homepage'/><Homepage path="/homepage"/></Router>
                 }
                 else {
                     return this.setState({error: 'wrong username or password'});
                 }
             }
-        ); */
+        );  */
     }
 
     handleUserChange(evt) {
@@ -58,8 +58,9 @@ export default class Login extends React.Component {
     }
 
     render() {
-		if (this.state.redirect === true) {
-			return <Redirect to="/homepage"/>
+		if (this.state.redir === true) {
+			console.log("masuk sini");
+			return <Redirect to="/homepage" />
 		}
         return (
           <div>
@@ -102,7 +103,6 @@ export default class Login extends React.Component {
                 />
                 <br/>
                 <Button 
-                type="submit" 
                 form="login-form" 
                 children="Login" 
                 style={{

@@ -1,6 +1,6 @@
 /** server/controllers/note.ctrl.js*/
-const Note = require('./../models/Note')
-const User = require('./../models/User')
+const Note = require('./../server/models/Note')
+const User = require('./../server/models/User')
 const fs = require('fs')
 const cloudinary = require('cloudinary')
 module.exports = {

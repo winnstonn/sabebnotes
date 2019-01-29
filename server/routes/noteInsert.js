@@ -1,5 +1,5 @@
 // server/routes/note.js
-const notecontroller = require('./../controllers/note.ctrl')
+const notecontroller = require('./../../controllers/note.ctrl')
 const multipart = require('connect-multiparty')
 const multipartWare = multipart()
 
