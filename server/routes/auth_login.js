@@ -1,4 +1,7 @@
 module.exports = 
     function(req, res) {
-        res.send(true);
+        if (req.body.username == 'user' && req.body.password == 'password')
+            return {response: '200 OK', authorized: true};
+        else
+            return {response: '200 OK', authorized: false};
     }
