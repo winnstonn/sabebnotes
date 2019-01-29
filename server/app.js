@@ -1,9 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-<<<<<<< HEAD
 app.use(cors());
-=======
->>>>>>> 544294882b14849d8cc6a1677c61ea6435239ef7
 const app = express();
 const port = process.env.PORT || 8000;
 const bodyParser = require('body-parser');
