@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import { Card } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 const styles = theme => ({
 	container: {
@@ -25,19 +26,52 @@ class Homepage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			note:'', error:''
+			note:'', idNote:0, error:''
 		};
 	}
 
 	handleInputNote(event) {
 		event.preventDefault();
+		const apiUrl = 'localhost:8000/api/note';
 
 		if (!this.state.note) {
 		  return this.setState({ error: 'A note is required' });
 		}
 
-		return this.setState({ note: event.target.value });
+		axios.post(apiUrl, this.state.username, this.state.note, this.state.idNote).then(
+            response => {
+				console.log(response);
+                if (response.data === true){
+                    this.props.history.push('/homepage');
+                }
+                else {
+                    return this.setState({error: 'Sorry, there is an error'});
+                }
+            }
+        );
 	}
+	
+	handleDeleteNote(event) {
+		const url = 'localhost:8000/deleteNote';
+		// masih belum kelar
+		axios.delete(url, this.state.username, this.state.idNote).then(
+            response => {
+				console.log(response);
+                if (response.data === true){
+                    this.props.history.push('/homepage');
+                }
+                else {
+                    return this.setState({error: 'Sorry, there is an error'});
+                }
+            }
+        );
+	}
+	
+	handleNoteChange(event) {
+        this.setState({
+          note: event.target.value,
+        });
+      }
 
 	render() {
 		const { classes } = this.props;
@@ -66,7 +100,7 @@ class Homepage extends React.Component {
 					  className={classes.textField}
 					  margin="normal"
 					  value={this.state.name}
-					  onChange={e => this.setState({ name: e.target.value })}
+					  onChange={this.handleNoteChange.bind(this)}
 					/>
 				<br/>
 				<br/>

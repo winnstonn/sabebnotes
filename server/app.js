@@ -5,6 +5,7 @@ const app = express();
 const port = process.env.PORT || 8000;
 const bodyParser = require('body-parser');
 const authLogin = require('./routes/auth_login');
+const InsertNote = require('./routes/noteInsert');
 // Set up a whitelist and check against it:
 var whitelist = ['http://example1.com', 'http://example2.com'] // Diisi sama url yang mau kita akses aja
 var corsOptions = {
@@ -32,6 +33,10 @@ app.post('/api/auth_login', function(req, res) {
 app.listen(port, () => {
     console.log('We are live on ' + port);
 });
+
+app.post('/api/note', function(req, res) {
+    InsertNote(req, res);
+})
 
 
 

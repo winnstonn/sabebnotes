@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { Card } from '@material-ui/core';
 import axios from 'axios';
+import Homepage from './Homepage';
+import { Redirect } from 'react-router-dom';
 
 export default class Login extends React.Component {
 
@@ -12,7 +14,7 @@ export default class Login extends React.Component {
             username: '',
             password: '',
             error:'', firstname:'', lastname:'',
-			email:''
+			email:'', redirect:false
         };
     }
 
@@ -27,16 +29,19 @@ export default class Login extends React.Component {
         if (!this.state.password) {
           return this.setState({ error: 'Password is required' });
         }
-        axios.post(apiUrl, this.state.username, this.state.password).then(
+		//this.context.router.history.push('/Homepage');
+		return this.setState({ redirect: true });
+/*         axios.post(apiUrl, this.state.username, this.state.password).then(
             response => {
                 if (response.data === true){
                     this.props.history.push('/homepage');
+					return this.setState({ redirect: true });
                 }
                 else {
                     return this.setState({error: 'wrong username or password'});
                 }
             }
-        );
+        ); */
     }
 
     handleUserChange(evt) {
@@ -52,6 +57,9 @@ export default class Login extends React.Component {
     }
 
     render() {
+		if (this.state.redirect === true) {
+			return <Redirect to="/homepage"/>
+		}
         return (
           <div>
 		  <h1>Welcome to The Notes</h1>
@@ -161,7 +169,6 @@ export default class Login extends React.Component {
                 </div>
             </Card>
             </div>
-            
-        )
+            )
     }
 }
