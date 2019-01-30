@@ -14,7 +14,7 @@ export default class Login extends React.Component {
             username: '',
             password: '',
             error:'', firstname:'', lastname:'',
-			email:''
+			email:'', redir:false
         };
     }
 
@@ -32,8 +32,9 @@ export default class Login extends React.Component {
         }
 		
 		const user = {username: this.state.username, password: this.state.password};
-		
-        axios.post(apiUrl, {user}).then(
+		console.log("keesinni");
+		return this.setState({ redir: true });
+/*        axios.post(apiUrl, {user}).then(
             response => {
                 console.log(response.data);
                 if (response.data.authorized === true){
@@ -43,7 +44,7 @@ export default class Login extends React.Component {
                     return this.setState({error: 'wrong username or password'});
                 }
             }
-        ); 
+        ); */
     }
 
     handleUserChange(evt) {
@@ -59,6 +60,10 @@ export default class Login extends React.Component {
     }
 
     render() {
+		if (this.state.redir === true) {
+			console.log("masuk siiii");
+			return <Redirect to="/homepage" />
+		}
         return (
           <div>
 		  <h1>Welcome to The Notes</h1>
