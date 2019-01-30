@@ -30,10 +30,11 @@ export default class Login extends React.Component {
         if (!this.state.password) {
           return this.setState({ error: 'Password is required' });
         }
-		
+
 		const user = {username: this.state.username, password: this.state.password};
-		console.log("keesinni");
-		return this.setState({ redir: true });
+
+		this.setState({ redir: true });
+		alert("Anda Berhasil Login");
 /*        axios.post(apiUrl, {user}).then(
             response => {
                 console.log(response.data);
@@ -60,122 +61,123 @@ export default class Login extends React.Component {
     }
 
     render() {
-		if (this.state.redir === true) {
+		if (this.state.redir) {
 			console.log("masuk siiii");
-			return <Redirect to="/homepage" />
+			return <Homepage/>
 		}
-        return (
-          <div>
-		  <h1>Welcome to The Notes</h1>
-          <div>
-            <h2> { this.state.error } </h2>
-          </div>
-          
-            <Card style={{
-                width:"fit-content",
-                margin: 'auto',
-                opacity: 0.8,
-                marginTop: '15vh',
-                
-                }}>
-                <div style={{
-                    float: "left",
-                    width: "fit-content"
-                }}>
-                <h2>Login</h2>
-                <form onSubmit= {this.handleSubmit.bind(this)} id="login-form">
-                <TextField
-                    label="Username"
-                    placeholder="ilhamlovenads"
-                    required
-                    value={this.state.username}
-                    onChange={this.handleUserChange.bind(this)}
-                />
-                <br/>
-                <TextField
-                    label="Password"
-                    placeholder="winstonneverdie"
-                    type="password"
-                    required
-                    value={this.state.password}
-                    onChange={this.handlePassChange.bind(this)}
-                    style={{
-                        margin: "25px"
-                    }}
-                />
-                <br/>
-                <Button 
-                form="login-form" 
-                children="Login" 
-                style={{
-                    backgroundColor: "#41f4c1",
-                    margin: "25px"
+		else {
+			return (
+			  <div>
+			  <h1>Welcome to The Notes</h1>
+			  <div>
+				<h2> { this.state.error } </h2>
+			  </div>
+			  
+				<Card style={{
+					width:"fit-content",
+					margin: 'auto',
+					opacity: 0.8,
+					marginTop: '15vh',
+					
+					}}>
+					<div style={{
+						float: "left",
+						width: "fit-content"
+					}}>
+					<h2>Login</h2>
+					<form  id="login-form">
+					<TextField
+						label="Username"
+						placeholder="ilhamlovenads"
+						required
+						value={this.state.username}
+						onChange={this.handleUserChange.bind(this)}
+					/>
+					<br/>
+					<TextField
+						label="Password"
+						placeholder="winstonneverdie"
+						type="password"
+						required
+						value={this.state.password}
+						onChange={this.handlePassChange.bind(this)}
+						style={{
+							margin: "25px"
+						}}
+					/>
+					<br/>
+					<Button 
+					form="login-form" 
+					children="Login" 
+					style={{
+						backgroundColor: "#41f4c1",
+						margin: "25px"
 
-                }} />
-                </form>
-                </div>
+					}} onClick= {this.handleSubmit.bind(this)}/>
+					</form>
+					</div>
 
-                <div style={{
-                    float: "left",
-                    width: "fit-content",
-                    position: "relative",
-                    marginTop: "40%",
-                    marginLeft: "25px",
-                    marginRight: "25px"
-                }}>
-                    <strong>or</strong>
-                </div>
-                <div style={{
-                    float: "left",
-                    marginLeft: "25px",
-                    marginRight: "25px",
-                    width: "fit-content"
-                }}>
-                <h2>Sign up</h2>
-                <form onSubmit= {this.handleSubmit.bind(this)} id="signup-form">
-                <TextField
-                    label="First name"
-                    required
-                    value={this.state.firstname}
-                />
-                <br/>
-                <TextField
-                    label="Last name"
-                    required
-                    value={this.state.lastname}
-                />
-                <br/>
-                <TextField
-                    label="Email"
-					placeholder="sayakamu@gmail.com"
-                    required
-                    value={this.state.email}
-                />
-                <br/>
-                <TextField
-                    label="Username"
-                    required
-                />
-                <br/>
-                <TextField
-                    label="Password"
-                    type="password"
-                    required
-                />
-                <br/>
-                <Button 
-                type="submit" 
-                form="signup-form" 
-                children="Sign up" 
-                style={{
-                    backgroundColor: "#41f4c1",
-                    margin: "25px"
-
-                }} />
-                </form>
-                </div>
-            </Card>
-            </div>
-            )
+					<div style={{
+						float: "left",
+						width: "fit-content",
+						position: "relative",
+						marginTop: "40%",
+						marginLeft: "25px",
+						marginRight: "25px"
+					}}>
+						<strong>or</strong>
+					</div>
+					<div style={{
+						float: "left",
+						marginLeft: "25px",
+						marginRight: "25px",
+						width: "fit-content"
+					}}>
+					<h2>Sign up</h2>
+					<form onSubmit= {this.handleSubmit.bind(this)} id="signup-form">
+					<TextField
+						label="First name"
+						required
+						value={this.state.firstname}
+					/>
+					<br/>
+					<TextField
+						label="Last name"
+						required
+						value={this.state.lastname}
+					/>
+					<br/>
+					<TextField
+						label="Email"
+						placeholder="sayakamu@gmail.com"
+						required
+						value={this.state.email}
+					/>
+					<br/>
+					<TextField
+						label="Username"
+						required
+					/>
+					<br/>
+					<TextField
+						label="Password"
+						type="password"
+						required
+					/>
+					<br/>
+					<Button 
+					type="submit" 
+					form="signup-form" 
+					children="Sign up" 
+					style={{
+						backgroundColor: "#41f4c1",
+						margin: "25px"
+					}} />
+					</form>
+					</div>
+				</Card>
+				</div>
+				)
+		}
     }
 }
