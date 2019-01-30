@@ -6,11 +6,13 @@ const port = process.env.PORT || 8000;
 const bodyParser = require('body-parser');
 const authLogin = require('./routes/auth_login');
 const InsertNote = require('./routes/noteInsert');
+const targetBaseUrl = 'http://localhost:8000/homepage';
 
 app.use(bodyParser.json());
 
 app.post('/api/auth_login', function(req, res) {
     res.send(authLogin(req, res));
+	res.redirect(targetBaseUrl);
 })
 .get('/', function(req, res) {
     res.send('welcome boi to ma API');

@@ -1,11 +1,10 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Card } from '@material-ui/core';
 import axios from 'axios';
 import Homepage from './Homepage';
-import createHistory from 'history/createBrowserHistory';
 
 export default class Login extends React.Component {
 
@@ -15,7 +14,7 @@ export default class Login extends React.Component {
             username: '',
             password: '',
             error:'', firstname:'', lastname:'',
-			email:'', redir:false
+			email:''
         };
     }
 
@@ -31,18 +30,20 @@ export default class Login extends React.Component {
         if (!this.state.password) {
           return this.setState({ error: 'Password is required' });
         }
-		return this.setState({ redir: true });
-        /* axios.post(apiUrl, {username: this.state.username, password: this.state.password}).then(
+		
+		const user = {username: this.state.username, password: this.state.password};
+		
+        axios.post(apiUrl, {user}).then(
             response => {
                 console.log(response.data);
                 if (response.data.authorized === true){
-                    return <Router><Redirect to='/homepage'/><Homepage path="/homepage"/></Router>
+                    return <Redirect to='/homepage'/>
                 }
                 else {
                     return this.setState({error: 'wrong username or password'});
                 }
             }
-        );  */
+        ); 
     }
 
     handleUserChange(evt) {
@@ -58,10 +59,6 @@ export default class Login extends React.Component {
     }
 
     render() {
-		if (this.state.redir === true) {
-			console.log("masuk sini");
-			return <Redirect to="/homepage" />
-		}
         return (
           <div>
 		  <h1>Welcome to The Notes</h1>
