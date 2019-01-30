@@ -25,7 +25,7 @@ export default class Login extends React.Component {
 
         if (!this.state.username) {
           return this.setState({ error: 'Username is required' });
-        }
+		}
     
         if (!this.state.password) {
           return this.setState({ error: 'Password is required' });
@@ -72,7 +72,6 @@ export default class Login extends React.Component {
 			  <div>
 				<h2> { this.state.error } </h2>
 			  </div>
-			  
 				<Card style={{
 					width:"fit-content",
 					margin: 'auto',

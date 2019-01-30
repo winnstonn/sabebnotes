@@ -26,19 +26,19 @@ class Homepage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			note:'', idNote:0, error:''
+			note:'', idNote:0, error:'',title:''
 		};
 	}
 
 	handleInputNote(event) {
 		event.preventDefault();
-		const apiUrl = 'localhost:8000/api/note';
+		const apiUrl = 'localhost:8000/';
 
 		if (!this.state.note) {
 		  return this.setState({ error: 'A note is required' });
 		}
 
-		axios.post(apiUrl, this.state.username, this.state.note, this.state.idNote).then(
+/* 		axios.post(apiUrl, this.state.username, this.state.note, this.state.idNote).then(
             response => {
 				console.log(response);
                 if (response.data === true){
@@ -48,7 +48,7 @@ class Homepage extends React.Component {
                     return this.setState({error: 'Sorry, there is an error'});
                 }
             }
-        );
+        ) */;
 	}
 	
 	handleDeleteNote(event) {
@@ -72,18 +72,24 @@ class Homepage extends React.Component {
           note: event.target.value,
         });
       }
+	handleTitleChange(event) {
+        this.setState({
+          title: event.target.value,
+        });
+      }
 
 	render() {
 		const { classes } = this.props;
 		return (
 			<div className="homepage">
-			<br/><br/>
 			<PrimarySearchAppBar />
+			<br/>
+			<div>{this.state.error}</div>
 			<h2 id="homep">This is Your Homepage</h2>
 			<Card style={{
 				width:"fit-content",
 				opacity: 0.8,
-				marginTop: '5vh',
+				margin:'auto',
 				marginLeft:'10vh'
 			}}>
 				<div style={{
@@ -92,14 +98,22 @@ class Homepage extends React.Component {
                     width: "fit-content"
                 }}>
 				<h2>Note</h2>
-				<form onSubmit= {this.handleInputNote.bind(this)} id="notef" 
-				className={classes.container} noValidate autoComplete="off">
+				<form id="notef" 
+				className={classes.container}>
+					<TextField
+					  id="standard-uncontrolledd"
+					  label="Title Note"
+					  className={classes.textField}
+					  margin="normal"
+					  value={this.state.title}
+					  onChange={this.handleTitleChange.bind(this)}
+					/>
 					<TextField
 					  id="standard-uncontrolled"
 					  label="Insert your note"
 					  className={classes.textField}
 					  margin="normal"
-					  value={this.state.name}
+					  value={this.state.note}
 					  onChange={this.handleNoteChange.bind(this)}
 					/>
 				<br/>
@@ -111,7 +125,7 @@ class Homepage extends React.Component {
 				style={{
 					backgroundColor: "#41f4c1",
 					margin: "25px"
-				}} />
+				}} onclick={this.handleInputNote.bind(this)} />
 				</form>
 				</div>
 			</Card>
