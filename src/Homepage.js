@@ -3,10 +3,32 @@ import './assets/css/homepage.css';
 import TextField from '@material-ui/core/TextField';
 import PrimarySearchAppBar from './Navbar';
 import { Card } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
+import CardHeader from '@material-ui/core/CardHeader';
 
-export default class Homepage extends React.Component {
+const styles = {
+  card: {
+    width: 275, marginLeft: 60, height:260
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+};
+
+class Homepage extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -50,6 +72,8 @@ export default class Homepage extends React.Component {
 
 	render() {
 		const { classes } = this.props;
+		const bull = <span className={classes.bullet}>•</span>;
+
 		return (
 			<div>
 			<PrimarySearchAppBar />
@@ -57,7 +81,7 @@ export default class Homepage extends React.Component {
 			<Card style={{
 					width:560,
 					opacity: 0.8,
-                    margin:"auto",
+                    marginTop:100, marginLeft:360, marginBottom:75,
                     padding: '35px'
 					
 					}}>
@@ -79,7 +103,7 @@ export default class Homepage extends React.Component {
 						onChange={this.handleNoteChange.bind(this)}
 						style = {{ width: 250}}
 					/>
-					<br/>
+					<br/><br/>
 					<Button 
 					form="signup-form" 
 					children="Insert" 
@@ -91,8 +115,29 @@ export default class Homepage extends React.Component {
 					}} onClick= {this.handleInputNote.bind(this)}/>
 					</form>
 					</div>
+					<br/><br/>
 				</Card>
+				<Card className={classes.card}>
+				<CardHeader subheader="Tanggal Dibuat"/>
+				  <CardContent>
+					<Typography variant="h5" component="h2">
+					Title Note
+					</Typography>
+					<br/>
+					<Typography component="p">
+					  This is the note part
+					</Typography>
+				  </CardContent>
+				  <br/>
+				</Card>
+				<br/><br/>
 			</div>
 		)
 	}
 }
+
+Homepage.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Homepage);
