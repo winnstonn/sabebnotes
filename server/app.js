@@ -7,12 +7,18 @@ const bodyParser = require('body-parser');
 const authLogin = require('./routes/auth_login');
 const mongodbClient = require('mongodb').MongoClient;
 const config = require('./serverConfig');
+const insertNote = require('./router/addingNote');
 
 app.use(bodyParser.json());
 
 app.post('/api/auth_login', function(req, res) {
     res.send(authLogin(req, res));
 })
+
+app.post('/insertNote', function(req, res) {
+    res.send(insertNote(req, res));
+})
+
 .get('/', function(req, res) {
     res.send('welcome boi to ma API');
 });

@@ -32,13 +32,13 @@ class Homepage extends React.Component {
 
 	handleInputNote(event) {
 		event.preventDefault();
-		const apiUrl = 'localhost:8000/';
+		const apiUrl = 'localhost:3000/insertNote';
 
 		if (!this.state.note) {
 		  return this.setState({ error: 'A note is required' });
 		}
 
-/* 		axios.post(apiUrl, this.state.username, this.state.note, this.state.idNote).then(
+ 		axios.post(apiUrl, this.state.username, this.state.note, this.state.idNote).then(
             response => {
 				console.log(response);
                 if (response.data === true){
@@ -48,7 +48,7 @@ class Homepage extends React.Component {
                     return this.setState({error: 'Sorry, there is an error'});
                 }
             }
-        ) */;
+        );
 	}
 	
 	handleDeleteNote(event) {
