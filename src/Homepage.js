@@ -32,13 +32,14 @@ class Homepage extends React.Component {
 
 	handleInputNote(event) {
 		event.preventDefault();
-		const apiUrl = 'localhost:3000/insertNote';
+		const apiUrl = 'localhost:8000/api/insertNote';
 
 		if (!this.state.note) {
 		  return this.setState({ error: 'A note is required' });
 		}
+		const input = { username: this.state.username, note:this.state.note, id:this.state.idNote, title:this.state.title};
 
- 		axios.post(apiUrl, this.state.username, this.state.note, this.state.idNote).then(
+ 		axios.post(apiUrl,input).then(
             response => {
 				console.log(response);
                 if (response.data === true){
@@ -50,23 +51,7 @@ class Homepage extends React.Component {
             }
         );
 	}
-	
-	handleDeleteNote(event) {
-		const url = 'localhost:8000/deleteNote';
-		// masih belum kelar
-		axios.delete(url, this.state.username, this.state.idNote).then(
-            response => {
-				console.log(response);
-                if (response.data === true){
-                    this.props.history.push('/homepage');
-                }
-                else {
-                    return this.setState({error: 'Sorry, there is an error'});
-                }
-            }
-        );
-	}
-	
+
 	handleNoteChange(event) {
         this.setState({
           note: event.target.value,
@@ -84,13 +69,10 @@ class Homepage extends React.Component {
 			<div className="homepage">
 			<PrimarySearchAppBar />
 			<br/>
-			<div>{this.state.error}</div>
-			<h2 id="homep">This is Your Homepage</h2>
 			<Card style={{
 				width:"fit-content",
 				opacity: 0.8,
-				margin:'auto',
-				marginLeft:'10vh'
+				margin:'auto'
 			}}>
 				<div style={{
                     float: "left",
@@ -123,7 +105,7 @@ class Homepage extends React.Component {
 				form="notef" 
 				children="Insert" 
 				style={{
-					backgroundColor: "#41f4c1",
+					backgroundColor: "#378bad",
 					margin: "25px"
 				}} onclick={this.handleInputNote.bind(this)} />
 				</form>

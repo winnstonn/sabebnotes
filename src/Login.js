@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { Card } from '@material-ui/core';
 import axios from 'axios';
 import Homepage from './Homepage';
+import Signup from './Signup';
 
 export default class Login extends React.Component {
 
@@ -12,8 +13,7 @@ export default class Login extends React.Component {
         this.state = {
             username: '',
             password: '',
-            error:'', firstname:'', lastname:'',
-			email:'', redir:false
+            error:'',redir:false, redirTosign:false
         };
     }
 
@@ -49,6 +49,10 @@ export default class Login extends React.Component {
           username: evt.target.value,
         });
       }
+	handleClick(e) {
+		e.preventDefault();
+		return this.setState({ redirTosign: true });
+	}
     
     handlePassChange(evt) {
         this.setState({
@@ -60,6 +64,9 @@ export default class Login extends React.Component {
 		if (this.state.redir) {
 			console.log("masuk siiii");
 			return <Homepage/>
+		}
+		else if (this.state.redirTosign) {
+			return <Signup/>
 		}
 		else {
 			return (
@@ -117,7 +124,7 @@ export default class Login extends React.Component {
                         fontSize: "10pt",
                         color: "#56ad5b"
                         }}
-                        href= '/signup'
+                        href= '/signup' onClick={this.handleClick.bind(this)}
                         >Don't have an account yet? Sign up here</a>
 				</Card>
 				</div>

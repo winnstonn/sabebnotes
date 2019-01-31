@@ -13,7 +13,7 @@ export default class Signup extends React.Component {
             username: '',
             password: '',
             error:'', firstname:'', lastname:'',
-			email:'', redir:false
+			email:'', addr:''
         };
     }
 
@@ -25,12 +25,18 @@ export default class Signup extends React.Component {
         if (!this.state.username) {
           return this.setState({ error: 'Username is required' });
 		}
-    
         if (!this.state.password) {
           return this.setState({ error: 'Password is required' });
         }
+		if (!this.state.email) {
+          return this.setState({ error: 'Email is required' });
+        }
+		if (!this.state.fname) {
+          return this.setState({ error: 'FirstName is required' });
+        }
 
-		const user = {username: this.state.username, password: this.state.password};
+		const user = {username: this.state.username, password: this.state.password,
+		              email:this.state.email, fname: this.state.firstname, laname:this.state.lastname, addr:this.state.addr};
 
         axios.post(apiUrl, user).then(
             response => {
@@ -62,6 +68,12 @@ export default class Signup extends React.Component {
         });
     }
 
+    handleAddrChange(evt) {
+        this.setState({
+          addr: evt.target.value,
+        });
+    }
+
     handleUserChange(evt) {
         this.setState({
           username: evt.target.value,
@@ -90,7 +102,7 @@ export default class Signup extends React.Component {
 					width:"fit-content",
 					margin: 'auto',
 					opacity: 0.8,
-                    marginTop: '15vh',
+                    marginTop: '10vh',
                     padding: '20px'
 					
 					}}>
@@ -98,8 +110,8 @@ export default class Signup extends React.Component {
                         width: "fit-content",
                         margin: "auto"
 					}}>
-					<h2>Login</h2>
-					<form  id="login-form">
+					<h2>Sign Up</h2>
+					<form  id="signup-form">
                     	<TextField
 						label="First name"
 						required
@@ -109,7 +121,6 @@ export default class Signup extends React.Component {
 							margin: "25px"
 						}}
 					/>
-                    <br/>
                     	<TextField
 						label="Last name"
 						required
@@ -131,13 +142,15 @@ export default class Signup extends React.Component {
 							margin: "25px"
 						}}
 					/>
-					<br/>
                     <TextField
 						label="Username"
 						placeholder="ilhamlovenads"
 						required
 						value={this.state.username}
 						onChange={this.handleUserChange.bind(this)}
+						style={{
+							margin: "25px"
+						}}
 					/>
 					<br/>
 					<TextField
@@ -151,24 +164,28 @@ export default class Signup extends React.Component {
 							margin: "25px"
 						}}
 					/>
+					<TextField
+						label="Address"
+						placeholder="Senayan Street 11670"
+						value={this.state.addr}
+						onChange={this.handleAddrChange.bind(this)}
+						style={{
+							margin: "25px"
+						}}
+					/>
+					<br/>
 					<Button 
-					form="login-form" 
-					children="Login" 
+					form="signup-form" 
+					children="Sign Up" 
 					style={{
 						backgroundColor: "#378bad",
-                        margin: "25px",
+                        marginTop: 15, marginLeft:10,
                         color: "white"
-
 					}} onClick= {this.handleSubmit.bind(this)}/>
 					</form>
 					</div>
-                    <a style={{
-                        fontSize: "10pt",
-                        color: "#56ad5b"
-                        }}
-                        href= '/signup'
-                        >Don't have an account yet? Sign up here</a>
 				</Card>
+				<br/><br/>
 				</div>
 				)
 		}

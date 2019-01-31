@@ -8,6 +8,7 @@ const authLogin = require('./routes/auth_login');
 const mongodbClient = require('mongodb').MongoClient;
 const config = require('./serverConfig');
 const insertNote = require('./router/addingNote');
+const signedUp = require('./router/signedUp');
 
 app.use(bodyParser.json());
 
@@ -26,6 +27,12 @@ user.connect(function (err, user) {
 
     app.post('/api/auth_login', function(req, res) {
         res.send(authLogin(req, res, db));
+    })
+	app.post('/api/auth_signup', function(req, res) {
+        res.send(signedUp(req, res, db));
+    })
+	app.post('/api/insertNote', function(req, res) {
+        res.send(insertNote(req, res, db));
     })
     .get('/', function(req, res) {
         res.send('welcome boi to ma API');

@@ -5,7 +5,7 @@ const config = require('./../serverConfig');
 }*/
 
 module.exports = {
-	function(req, res) {
+	function(req, res, db) {
         if (req.body.username == 'user' && req.body.password == 'password')
             return {response: '200 OK', authorized: true};
         else
