@@ -1,9 +1,17 @@
 const userExistInDatabase = (username, password, db) => {
-
+	var dbo = db.db("sabebnotes");
+	var query = {usernamee: username};
+	dbo.collection("User").findOne(query, function(err, result) {
+    if (err) {
+		throw err;
+	}
+	else {
+		console.log("Found yes");
+		return true;
+    }
+	db.close();
+  });
 }
-
-
-
 
 module.exports = {
     function(req, res, db) {
