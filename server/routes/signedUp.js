@@ -1,8 +1,6 @@
-const config = require('./../serverConfig');
-
 const signedUp = (fname, lname, username, password, addr, email, db) => {
 	var dbo = db.db("sabebnotes");
-	var obj = {first:fname,};
+	var obj = {first:fname, last:lname, user: username, pass: password, address: addr, emaill:email};
 	dbo.collection("User").insertOne(obj, function(err, res) {
     if (err) {
 		throw err;
