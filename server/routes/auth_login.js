@@ -1,6 +1,13 @@
+const userExistInDatabase = (username, password, db) => {
+
+}
+
+
+
+
 module.exports = 
-    function(req, res) {
-        if (req.body.username == 'user' && req.body.password == 'password')
+    function(req, res, db) {
+        if (userExistInDatabase(req.body.username, req.body.password, db) == true)
             return {response: '200 OK', authorized: true};
         else
             return {response: '200 OK', authorized: false};
