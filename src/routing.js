@@ -1,5 +1,6 @@
 import Login from './Login';
 import Homepage from './Homepage';
+import Signup from './Signup';
 import React from 'react';
 import posed, { PoseGroup } from 'react-pose';
 import { Link, Router, Location } from '@reach/router';
@@ -42,6 +43,7 @@ class Routing extends React.Component {
 				<PosedRouter>
 					<Homepage path="/homepage" />
 					<Login path="/login" />
+					<Signup path="/signup" />
 				</PosedRouter>
 			</div>
 		)

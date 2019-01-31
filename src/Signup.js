@@ -5,7 +5,7 @@ import { Card } from '@material-ui/core';
 import axios from 'axios';
 import Homepage from './Homepage';
 
-export default class Login extends React.Component {
+export default class Signup extends React.Component {
 
     constructor(props) {
         super(props);
@@ -20,7 +20,7 @@ export default class Login extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const apiUrl = 'http://localhost:8000/api/auth_login'
+        const apiUrl = 'http://localhost:8000/api/auth_signup'
 
         if (!this.state.username) {
           return this.setState({ error: 'Username is required' });
@@ -44,11 +44,29 @@ export default class Login extends React.Component {
         );
     }
 
+    handleFirstNameChange(evt) {
+        this.setState({
+          firstname: evt.target.value,
+        });
+    }
+
+    handleLastNameChange(evt) {
+        this.setState({
+          lastname: evt.target.value,
+        });
+    }
+
+    handleEmailChange(evt) {
+        this.setState({
+          email: evt.target.value,
+        });
+    }
+
     handleUserChange(evt) {
         this.setState({
           username: evt.target.value,
         });
-      }
+    }
     
     handlePassChange(evt) {
         this.setState({
@@ -82,7 +100,39 @@ export default class Login extends React.Component {
 					}}>
 					<h2>Login</h2>
 					<form  id="login-form">
-					<TextField
+                    	<TextField
+						label="First name"
+						required
+						value={this.state.firstname}
+						onChange={this.handleFirstNameChange.bind(this)}
+						style={{
+							margin: "25px"
+						}}
+					/>
+                    <br/>
+                    	<TextField
+						label="Last name"
+						required
+						value={this.state.lastname}
+						onChange={this.handleLastNameChange.bind(this)}
+						style={{
+							margin: "25px"
+						}}
+					/>
+                    <br/>
+                    	<TextField
+						label="Email"
+						placeholder="ilham@example.com"
+						type="email"
+						required
+						value={this.state.email}
+						onChange={this.handleEmailChange.bind(this)}
+						style={{
+							margin: "25px"
+						}}
+					/>
+					<br/>
+                    <TextField
 						label="Username"
 						placeholder="ilhamlovenads"
 						required
@@ -101,7 +151,6 @@ export default class Login extends React.Component {
 							margin: "25px"
 						}}
 					/>
-					<br/>
 					<Button 
 					form="login-form" 
 					children="Login" 
