@@ -7,8 +7,8 @@ const bodyParser = require('body-parser');
 const authLogin = require('./routes/auth_login');
 const mongodbClient = require('mongodb').MongoClient;
 const config = require('./serverConfig');
-const insertNote = require('./router/addingNote');
-const signedUp = require('./router/signedUp');
+const insertNote = require('./routes/addingNote');
+const signedUp = require('./routes/signedUp');
 
 app.use(bodyParser.json());
 
