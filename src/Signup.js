@@ -179,7 +179,7 @@ export default class Signup extends React.Component {
 					children="Sign Up" 
 					style={{
 						backgroundColor: "#378bad",
-                        marginTop: 15, marginLeft:10,
+                        marginTop: 15, marginLeft:5,
                         color: "white"
 					}} onClick= {this.handleSubmit.bind(this)}/>
 					</form>
