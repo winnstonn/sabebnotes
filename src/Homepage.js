@@ -42,11 +42,11 @@ class Homepage extends React.Component {
  		axios.post(apiUrl,input).then(
             response => {
 				console.log(response);
-                if (response.data === true){
-                    this.props.history.push('/homepage');
+                if (response.response === 'Nice insert'){
+                    return <Homepage />;
                 }
                 else {
-                    return this.setState({error: 'Sorry, there is an error'});
+                    return this.setState({error: response.response});
                 }
             }
         );
