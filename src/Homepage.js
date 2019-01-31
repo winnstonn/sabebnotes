@@ -2,26 +2,11 @@ import React from 'react';
 import './assets/css/homepage.css';
 import TextField from '@material-ui/core/TextField';
 import PrimarySearchAppBar from './Navbar';
-import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
 import { Card } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
-const styles = theme => ({
-	container: {
-		display: 'flex',
-		flexWrap: 'wrap',
-		marginLeft: 25
-	},
-	textField: {
-		marginLeft: theme.spacing.unit,
-		marginRight: theme.spacing.unit,
-		width: 350,
-	},
-});
-
-class Homepage extends React.Component {
+export default class Homepage extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -66,58 +51,48 @@ class Homepage extends React.Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<div className="homepage">
+			<div>
 			<PrimarySearchAppBar />
 			<br/>
 			<Card style={{
-				width:"fit-content",
-				opacity: 0.8,
-				margin:'auto'
-			}}>
-				<div style={{
-                    float: "left",
-					marginTop: "15px",
-                    width: "fit-content"
-                }}>
-				<h2>Note</h2>
-				<form id="notef" 
-				className={classes.container}>
+					width:560,
+					opacity: 0.8,
+                    margin:"auto",
+                    padding: '35px'
+					
+					}}>
+					<div style={{
+                        margin: "auto"
+					}}>
+					<h2>Insert Note</h2>
+					<form  id="signup-form">
 					<TextField
-					  id="standard-uncontrolledd"
-					  label="Title Note"
-					  className={classes.textField}
-					  margin="normal"
-					  value={this.state.title}
-					  onChange={this.handleTitleChange.bind(this)}
+						label="Note Title"
+						value={this.state.title}
+						onChange={this.handleTitleChange.bind(this)}
+						style = {{ marginRight:30, width: 250}}
 					/>
 					<TextField
-					  id="standard-uncontrolled"
-					  label="Insert your note"
-					  className={classes.textField}
-					  margin="normal"
-					  value={this.state.note}
-					  onChange={this.handleNoteChange.bind(this)}
+						label="Note"
+						placeholder="Insert your note here"
+						value={this.state.note}
+						onChange={this.handleNoteChange.bind(this)}
+						style = {{ width: 250}}
 					/>
-				<br/>
-				<br/>
-				<Button 
-				type="submit" 
-				form="notef" 
-				children="Insert" 
-				style={{
-					backgroundColor: "#378bad",
-					margin: "25px"
-				}} onclick={this.handleInputNote.bind(this)} />
-				</form>
-				</div>
-			</Card>
+					<br/>
+					<Button 
+					form="signup-form" 
+					children="Insert" 
+					style={{
+						backgroundColor: "#378bad",
+                        margin: "18px",
+                        color: "white"
+
+					}} onClick= {this.handleInputNote.bind(this)}/>
+					</form>
+					</div>
+				</Card>
 			</div>
 		)
 	}
 }
-
-Homepage.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Homepage);
