@@ -52,7 +52,7 @@ export default class Login extends React.Component {
       }
 	handleClick(e) {
 		e.preventDefault();
-		return this.setState({ redirTosign: true }).bind(this);
+		return this.setState({ redirTosign: true });
 	}
     
     handlePassChange(evt) {
