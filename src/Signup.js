@@ -31,7 +31,7 @@ export default class Signup extends React.Component {
 		if (!this.state.email) {
           return this.setState({ error: 'Email is required' });
         }
-		if (!this.state.fname) {
+		if (!this.state.firstname) {
           return this.setState({ error: 'FirstName is required' });
         }
 
@@ -40,7 +40,8 @@ export default class Signup extends React.Component {
 
         axios.post(apiUrl, user).then(
             response => {
-                if (response.data.authorized === true){
+				console.log(response.data);
+                if (response.data.success){
                     return this.setState({ redir: true });
                 }
                 else {
@@ -99,11 +100,11 @@ export default class Signup extends React.Component {
 				<h2> { this.state.error } </h2>
 			  </div>
 				<Card style={{
-					width:"fit-content",
+					width:"600px",
 					margin: 'auto',
 					opacity: 0.8,
                     marginTop: '10vh',
-                    padding: '20px'
+					padding: '20px',
 					
 					}}>
 					<div style={{
@@ -121,6 +122,7 @@ export default class Signup extends React.Component {
 							margin: "25px"
 						}}
 					/>
+					<br/>
                     	<TextField
 						label="Last name"
 						required
@@ -142,6 +144,7 @@ export default class Signup extends React.Component {
 							margin: "25px"
 						}}
 					/>
+					<br/>
                     <TextField
 						label="Username"
 						placeholder="ilhamlovenads"
@@ -164,6 +167,7 @@ export default class Signup extends React.Component {
 							margin: "25px"
 						}}
 					/>
+					<br/>
 					<TextField
 						label="Address"
 						placeholder="Senayan Street 11670"

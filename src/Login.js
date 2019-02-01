@@ -5,7 +5,6 @@ import { Card } from '@material-ui/core';
 import axios from 'axios';
 import Homepage from './Homepage';
 import Signup from './Signup';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 export default class Login extends React.Component {
 
@@ -32,8 +31,9 @@ export default class Login extends React.Component {
         }
 
 		const user = {username: this.state.username, password: this.state.password};
+		return this.setState({ redir: true });
 
-        axios.post(apiUrl, user).then(
+/*        axios.post(apiUrl, user).then(
             response => {
                 if (response.data.authorized === true){
                     return this.setState({ redir: true });
@@ -42,7 +42,7 @@ export default class Login extends React.Component {
                     return this.setState({error: 'wrong username or password'});
                 }
             }
-        );
+        );*/
     }
 
     handleUserChange(evt) {
@@ -64,7 +64,10 @@ export default class Login extends React.Component {
     render() {
 		if (this.state.redir) {
 			console.log("masuk siiii");
-			return <Homepage />
+			return <Homepage/>
+		}
+		else if (this.state.redirTosign) {
+			return <Signup/>
 		}
 		else {
 			return (
@@ -122,10 +125,9 @@ export default class Login extends React.Component {
                         fontSize: "10pt",
                         color: "#56ad5b"
                         }}
-                        href= '/signup'
+                        href= '/signup' onClick={this.handleClick.bind(this)}
                         >Don't have an account yet? Sign up here</a>
 				</Card>
-				<Route exact path="/signup" component={Signup} />
 				</div>
 				)
 		}

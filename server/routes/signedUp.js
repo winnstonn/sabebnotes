@@ -1,25 +1,55 @@
-const signedUp = (fname, lname, username, password, addr, email, db) => {
-	var dbo = db.db("sabebnotes");
-	var obj = {'first':fname, 'last':lname, 'user': username, 'pass': password, 'address': addr, 'email':email};
-	dbo.collection("User").insertOne(obj, function(err, res) {
+const checkUniquenessOfUsername = (username, db) => {
+	const obj = {username: username};
+	db.collection("User").findOne(obj, function(err, res) {
     if (err) {
 		throw err;
     }
 	else {
-		console.log("1 document inserted");
-		return true;
+		if (res == {}) {
+			console.log('username is not unique');
+			console.log(res);
+			return true;
+		} else {
+			return false;
+		}
     }
-	db.close();
-  });
+	});
+}
+
+const signUpUser = (fname, lname, username, password, addr, email, db) => {
+	var obj = {
+		'username': username,
+		'password': password,
+		'fname': fname,
+		'lname': lname,
+		'email': email,
+		'addr': addr
+	};
+	const usernameIsUnique = checkUniquenessOfUsername(username, db);
+	if (usernameIsUnique) {
+
+		db.collection("User").insertOne(obj, function (err, res) {
+			if (err) {
+				console.log(err);
+				return false;
+			} else {
+				console.log("1 document inserted");
+				return true;
+			}
+		});
+	} else {
+		return false;
+	}
 }
 
 module.exports = {
 	function(req, res, db) {
-		if (signedUp(req.body.fname, req.body.lname, req.body.username, req.body.password, req.body.addr, req.body.email, db) == true) {
-			return {response: "inserted fine"};
+		const response = signUpUser(req.body.fname, req.body.lname, req.body.username, req.body.password, req.body.addr, req.body.email, db)
+		if (response) {
+			return res.json({response: "200 OK", success: true});
 		}
 		else {
-			return {response:"Something wrong in regis"};
+			return res.json({response:"200 OK", success: false});
 		}
 	}
 }
