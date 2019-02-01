@@ -13,7 +13,7 @@ export default class Signup extends React.Component {
             username: '',
             password: '',
             error:'', firstname:'', lastname:'',
-			email:'', addr:''
+			email:'', addr:'', note:[]
         };
     }
 
@@ -36,7 +36,8 @@ export default class Signup extends React.Component {
         }
 
 		const user = {username: this.state.username, password: this.state.password,
-		              email:this.state.email, fname: this.state.firstname, laname:this.state.lastname, addr:this.state.addr};
+		              email:this.state.email, fname: this.state.firstname, laname:this.state.lastname, addr:this.state.addr, 
+					  arrayNote:this.state.note};
 
         axios.post(apiUrl, user).then(
             response => {
