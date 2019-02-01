@@ -66,9 +66,6 @@ export default class Login extends React.Component {
 			console.log("masuk siiii");
 			return <Homepage />
 		}
-		else if (this.state.redirTosign) {
-			return <Signup/>
-		}
 		else {
 			return (
 			  <div>
@@ -125,9 +122,10 @@ export default class Login extends React.Component {
                         fontSize: "10pt",
                         color: "#56ad5b"
                         }}
-                        href= '/signup' onClick={this.handleClick.bind(this)}
+                        href= '/signup'
                         >Don't have an account yet? Sign up here</a>
 				</Card>
+				<Route exact path="/signup" component={Signup} />
 				</div>
 				)
 		}
