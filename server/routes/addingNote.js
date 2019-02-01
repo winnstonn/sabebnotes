@@ -1,23 +1,37 @@
 const addNote = (username, note, idNote, title, db) => {
-	var dbo = db.db("sabebnotes");
-	var obj = {'user':username, 'note': note, 'id': idNote, 'judul': title};
-	dbo.collection("Note").insertOne(obj, function(err, res) {
+	var obj = {'note': note, 'id': idNote, 'judul': title};
+	db.collection("User").findOne({'username':username}, function(err, result) {
     if (err) {
 		throw err;
+	}
+	else {
+		var query = { $push: { 'arrNote': [obj] }};
+		db.collection("User").update({ 'username':username },query, function(err, res) {
+		if (err) {
+			throw err;
+		}
+		else {
+			var jsonRes = getNote(username, db);
+			return jsonRes;
+		}
+    }
+  });
+}
+const getNote = (username, db) => {
+	dbo.collection("User").find({'username':username}).toArray(function(err, result) {
+    if (err) {
+		return {'respon':'Bad', 'res': null};
     }
 	else {
-		console.log("1 document inserted");
-		return true;
+		console.log("Here are documents");
+		return {'respon': 'Good', 'res':result};
     }
-	db.close();
   });
 }
 
 module.exports = {
 	function(req, res, db) {
-        if (addNote(req.body.username, req.body.note, req.body.idNote, req.body.title, db) == true)
-            return {response: 'Nice insert'};
-        else
-            return {response: 'opps, hit problem'};
+		var result = addNote(req.body.username, req.body.note, req.body.idNote, req.body.title, db);
+		return res.json(result);
     }
 }

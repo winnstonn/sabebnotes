@@ -1,5 +1,5 @@
 const userExistInDatabase = (username, password, db) => {
-	var query = {'username': username, password: password};
+	var query = {'username': username, 'password': password};
 	db.collection("User").findOne(query, function(err, result) {
     if (err) {
 		throw err;
