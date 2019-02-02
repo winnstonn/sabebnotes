@@ -14,8 +14,9 @@ const addNote = (username, note, idNote, title, db) => {
 			var jsonRes = getNote(username, db);
 			return jsonRes;
 		}
-    }
-  });
+      });
+	}
+   });
 }
 const getNote = (username, db) => {
 	dbo.collection("User").find({'username':username}).toArray(function(err, result) {

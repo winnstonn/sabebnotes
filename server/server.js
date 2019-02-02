@@ -28,7 +28,7 @@ user.connect(function (err, user) {
     app.post('/api/auth_login', function(req, res) {
         res.send(authLogin(req, res, db));
     }).post('/api/auth_signup', function(req, res) {
-        res.send(signedUp(req, res, db));
+        res.send(signedUp.signup(req, res, db));
     }).post('/api/insertNote', function(req, res) {
         res.send(insertNote(req, res, db));
     }).get('/', function(req, res) {

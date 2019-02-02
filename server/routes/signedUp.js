@@ -1,15 +1,17 @@
 const checkUniquenessOfUsername = (username, db) => {
-	const obj = {username: username};
+	const obj = {"username": username};
 	db.collection("User").findOne(obj, function(err, res) {
     if (err) {
+		console.log("ada errorr uyyy");
 		throw err;
     }
 	else {
-		if (res == {}) {
+		if (res === {}) {
 			console.log('username is unique');
 			console.log(res);
 			return true;
 		} else {
+			console.log("kena false uy");
 			return false;
 		}
     }
@@ -18,19 +20,20 @@ const checkUniquenessOfUsername = (username, db) => {
 
 const signUpUser = (fname, lname, username, password, addr, email, arrNote, db) => {
 	var obj = {
-		'username': username,
-		'password': password,
-		'fname': fname,
-		'lname': lname,
-		'email': email,
-		'addr': addr, 
-		'arrNote':arrNote
+		"username": username,
+		"password": password,
+		"fname": fname,
+		"lname": lname,
+		"email": email,
+		"addr": addr, 
+		"arrNote":arrNote
 	};
 	const usernameIsUnique = checkUniquenessOfUsername(username, db);
-	if (usernameIsUnique) {
+	if (usernameIsUnique === true) {
 
 		db.collection("User").insertOne(obj, function (err, res) {
 			if (err) {
+				console.log("ada error");
 				console.log(err);
 				return false;
 			} else {
@@ -44,9 +47,9 @@ const signUpUser = (fname, lname, username, password, addr, email, arrNote, db) 
 }
 
 module.exports = {
-	function(req, res, db) {
+	signup: (req, res, db) => {
 		const response = signUpUser(req.body.fname, req.body.lname, req.body.username, req.body.password, req.body.addr, req.body.email,
-		req.body.note, db)
+		req.body.note, db);
 		if (response) {
 			return res.json({response: "200 OK", success: true});
 		}

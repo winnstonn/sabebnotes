@@ -20,7 +20,7 @@ export default class Signup extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const apiUrl = 'http://localhost:8000/api/auth_signup'
+        const apiUrl = 'http://localhost:8000/api/auth_signup';
 
         if (!this.state.username) {
           return this.setState({ error: 'Username is required' });
@@ -43,9 +43,11 @@ export default class Signup extends React.Component {
             response => {
 				console.log(response.data);
                 if (response.data.success){
+					console.log("Sukses registrasi");
                     return this.setState({ redir: true });
                 }
                 else {
+					console.log("maaf ada error");
                     return this.setState({error: 'wrong username or password'});
                 }
             }
