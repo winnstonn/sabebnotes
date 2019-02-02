@@ -27,7 +27,7 @@ const signUpUser = (fname, lname, username, password, addr, email, arrNote, db) 
 		"arrNote":arrNote
 	};
 	const usernameIsUnique = checkUniquenessOfUsername(username, db);
-	console.log(usernameIsUnique);
+	console.log(usernameIsUnique); // BUG : ONLY RETURN BLANK IN CONSOLE 
 	if (usernameIsUnique === "") {
 		console.log("masuk kesini unik");
 		db.collection("User").insertOne(obj, function (err, res) {
