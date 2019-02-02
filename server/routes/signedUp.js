@@ -8,7 +8,7 @@ const checkUniquenessOfUsername = (username, db) => {
 	else {
 		if (res === null) {
 			console.log('username is unique');
-			return true;
+			return res;
 		} else {
 			return false;
 		}
@@ -27,9 +27,8 @@ const signUpUser = (fname, lname, username, password, addr, email, arrNote, db) 
 		"arrNote":arrNote
 	};
 	const usernameIsUnique = checkUniquenessOfUsername(username, db);
-	console.log(usernameIsUnique); // BUG : ONLY RETURN BLANK IN CONSOLE 
-	if (usernameIsUnique === "") {
-		console.log("masuk kesini unik");
+
+	if (usernameIsUnique == undefined) {
 		db.collection("User").insertOne(obj, function (err, res) {
 			if (err) {
 				console.log("ada error");
@@ -49,7 +48,7 @@ module.exports = {
 	signup: (req, res, db) => {
 		const response = signUpUser(req.body.fname, req.body.laname, req.body.username, req.body.password, req.body.addr, req.body.email,
 		req.body.arrayNote, db);
-		if (response) {
+		if (response == undefined) {
 			return res.json({response: "200 OK", success: true});
 		}
 		else {
