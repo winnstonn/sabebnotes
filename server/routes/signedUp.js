@@ -6,12 +6,10 @@ const checkUniquenessOfUsername = (username, db) => {
 		throw err;
     }
 	else {
-		if (res === {}) {
+		if (res === null) {
 			console.log('username is unique');
-			console.log(res);
 			return true;
 		} else {
-			console.log("kena false uy");
 			return false;
 		}
     }
@@ -29,8 +27,9 @@ const signUpUser = (fname, lname, username, password, addr, email, arrNote, db) 
 		"arrNote":arrNote
 	};
 	const usernameIsUnique = checkUniquenessOfUsername(username, db);
-	if (usernameIsUnique === true) {
-
+	console.log(usernameIsUnique);
+	if (usernameIsUnique === "") {
+		console.log("masuk kesini unik");
 		db.collection("User").insertOne(obj, function (err, res) {
 			if (err) {
 				console.log("ada error");
@@ -48,8 +47,8 @@ const signUpUser = (fname, lname, username, password, addr, email, arrNote, db) 
 
 module.exports = {
 	signup: (req, res, db) => {
-		const response = signUpUser(req.body.fname, req.body.lname, req.body.username, req.body.password, req.body.addr, req.body.email,
-		req.body.note, db);
+		const response = signUpUser(req.body.fname, req.body.laname, req.body.username, req.body.password, req.body.addr, req.body.email,
+		req.body.arrayNote, db);
 		if (response) {
 			return res.json({response: "200 OK", success: true});
 		}
