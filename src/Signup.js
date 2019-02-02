@@ -19,39 +19,61 @@ export default class Signup extends React.Component {
 
 
     handleSubmit(event) {
-        event.preventDefault();
-        const apiUrl = 'http://localhost:8000/api/auth_signup';
+    	event.preventDefault();
+    	const apiUrl = 'http://localhost:8000/api/auth_signup';
 
-        if (!this.state.username) {
-          return this.setState({ error: 'Username is required' });
-		}
-        if (!this.state.password) {
-          return this.setState({ error: 'Password is required' });
-        }
-		if (!this.state.email) {
-          return this.setState({ error: 'Email is required' });
-        }
-		if (!this.state.firstname) {
-          return this.setState({ error: 'FirstName is required' });
-        }
+    	if (!this.state.username) {
+    		return this.setState({
+    			error: 'Username is required'
+    		});
+    	}
+    	if (!this.state.password) {
+    		return this.setState({
+    			error: 'Password is required'
+    		});
+    	}
+    	if (!this.state.email) {
+    		return this.setState({
+    			error: 'Email is required'
+    		});
+    	}
+    	if (!this.state.firstname) {
+    		return this.setState({
+    			error: 'FirstName is required'
+    		});
+    	}
 
-		const user = {username: this.state.username, password: this.state.password,
-		              email:this.state.email, fname: this.state.firstname, laname:this.state.lastname, addr:this.state.addr, 
-					  arrayNote:this.state.note};
+    	const user = {
+    		username: this.state.username,
+    		password: this.state.password,
+    		email: this.state.email,
+    		fname: this.state.firstname,
+    		laname: this.state.lastname,
+    		addr: this.state.addr,
+    		arrayNote: this.state.note
+    	};
 
-        axios.post(apiUrl, user).then(
-            response => {
-				console.log(response.data);
-                if (response.data.success){
-					console.log("Sukses registrasi");
-                    return this.setState({ redir: true });
-                }
-                else {
-					console.log("maaf ada error");
-                    return this.setState({error: 'wrong username or password'});
-                }
-            }
-        );
+    	axios.post(apiUrl, user).then(
+    		response => {
+    			console.log(response.data);
+    			if (response.data.status === 'success') {
+    				console.log("Sukses registrasi");
+    				return this.setState({
+    					redir: true
+    				});
+    			} else if (response.data.status === 'failed') {
+    				console.log("maaf ada error");
+    				return this.setState({
+    					error: 'username must be unique'
+    				});
+    			} else if (response.data.status === 'error') {
+    				console.log("maaf ada error");
+    				return this.setState({
+    					error: 'Error with the server, please resubmit'
+    				});
+    			}
+    		}
+    	);
     }
 
     handleFirstNameChange(evt) {
@@ -99,7 +121,15 @@ export default class Signup extends React.Component {
 			return (
 			  <div>
 			  <h1>Welcome to The Notes</h1>
-			  <div>
+			  <div
+			  style= {{
+				  backgroundColor: '#e55b5b',
+				  borderRadius: '5px',
+				  width: 'fit-content',
+				  margin: 'auto'
+
+			  }}
+			  >
 				<h2> { this.state.error } </h2>
 			  </div>
 				<Card style={{
