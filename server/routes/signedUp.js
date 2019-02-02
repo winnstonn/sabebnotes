@@ -16,7 +16,7 @@ const checkUniquenessOfUsername = (username, db) => {
 	});
 }
 
-const signUpUser = (fname, lname, username, password, addr, email, note, db) => {
+const signUpUser = (fname, lname, username, password, addr, email, arrNote, db) => {
 	var obj = {
 		'username': username,
 		'password': password,
@@ -24,7 +24,7 @@ const signUpUser = (fname, lname, username, password, addr, email, note, db) => 
 		'lname': lname,
 		'email': email,
 		'addr': addr, 
-		'arrNote':note
+		'arrNote':arrNote
 	};
 	const usernameIsUnique = checkUniquenessOfUsername(username, db);
 	if (usernameIsUnique) {
