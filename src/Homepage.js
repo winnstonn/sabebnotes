@@ -49,11 +49,12 @@ class Homepage extends React.Component {
  		axios.post(apiUrl,input).then(
             response => {
 				console.log(response);
-                if (response.response === 'Nice insert'){
+                if (response.respon === 'Good'){
+					console.log("note inserted")
                     return <Homepage />;
                 }
                 else {
-                    return this.setState({error: response.response});
+                    return this.setState({error: 'There is an error please try again'});
                 }
             }
         );
@@ -78,6 +79,17 @@ class Homepage extends React.Component {
 			<div>
 			<PrimarySearchAppBar />
 			<br/>
+			<div
+			  style= {{
+				  backgroundColor: '#e55b5b',
+				  borderRadius: '5px',
+				  width: 'fit-content',
+				  margin: 'auto'
+
+			  }}
+			  >
+				<h2> { this.state.error } </h2>
+			  </div>
 			<Card style={{
 					width:560,
 					opacity: 0.8,

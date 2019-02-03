@@ -26,11 +26,11 @@ user.connect(function (err, user) {
     const db = user.db(config.DB_NAME);
 
     app.post('/api/auth_login', function(req, res) {
-        res.send(authLogin(req, res, db));
+        res.send(authLogin.login(req, res, db));
     }).post('/api/auth_signup', function(req, res) {
         res.send(signedUp.signup(req, res, db));
     }).post('/api/insertNote', function(req, res) {
-        res.send(insertNote(req, res, db));
+        res.send(insertNote.addnote(req, res, db));
     }).get('/', function(req, res) {
         res.send('welcome boi to ma API');
     });

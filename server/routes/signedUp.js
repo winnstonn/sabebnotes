@@ -24,7 +24,6 @@ const signUpUser = (fname, lname, username, password, addr, email, arrNote, db) 
 		"arrNote": arrNote
 	};
 	const usernameIsUnique = checkUniquenessOfUsername(username, db);
-
 	if (usernameIsUnique) {
 		db.collection("User").insertOne(obj, function (err, res) {
 			if (err) {

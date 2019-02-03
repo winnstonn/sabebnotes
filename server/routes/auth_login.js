@@ -5,7 +5,8 @@ const userExistInDatabase = (username, password, db) => {
 		throw err;
 	}
 	else {
-        if (result !== {}) {
+		console.log(result);
+        if (result !== null) {
 		    console.log("Found yes");
             return true;
         } else {
@@ -16,7 +17,7 @@ const userExistInDatabase = (username, password, db) => {
 }
 
 module.exports = {
-    function(req, res, db) {
+    login:(req, res, db) => {
         if (userExistInDatabase(req.body.username, req.body.password, db) == true)
             return res.json({response: '200 OK', authorized: true});
         else
