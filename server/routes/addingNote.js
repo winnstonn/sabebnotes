@@ -1,4 +1,4 @@
-const addNote = (username, note, idNote, title, db) => {
+const addNote = async (username, note, idNote, title, db) => {
 	var obj = {"note": note, "id": idNote, "judul": title};
 	db.collection("User").findOne({'username':username}, function(err, result) {
     if (err) {
@@ -6,20 +6,20 @@ const addNote = (username, note, idNote, title, db) => {
 	}
 	else {
 		var query = { $push: { "arrNote": obj }};
-		db.collection("User").update({ 'username':username },query, function(err, res) {
+		return db.collection("User").update({ 'username':username },query, function(err, res) {
 		if (err) {
 			throw err;
 		}
 		else {
 			var jsonRes = getNote(username, db);
-			return jsonRes;
+			return res.json(jsonRes);
 		}
       });
 	}
    });
 }
 const getNote = (username, db) => {
-	db.collection("User").find({'username':username}).toArray(function(err, result) {
+	return db.collection("User").find({'username':username}).toArray(function(err, result) {
     if (err) {
 		return {'respon':'Bad', 'res': null};
     }
@@ -32,7 +32,6 @@ const getNote = (username, db) => {
 
 module.exports = {
 	addnote: (req, res, db) => {
-		var result = addNote(req.body.username, req.body.note, req.body.idNote, req.body.title, db);
-		return res.json(result);
+		addNote(req.body.username, req.body.note, req.body.idNote, req.body.title, db);
     }
 }

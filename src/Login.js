@@ -20,7 +20,7 @@ export default class Login extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const apiUrl = 'http://localhost:8000/api/auth_login'
+        const apiUrl = 'http://localhost:8000/api/auth_login';
 
         if (!this.state.username) {
           return this.setState({ error: 'Username is required' });
@@ -34,7 +34,8 @@ export default class Login extends React.Component {
 
         axios.post(apiUrl, user).then(
             response => {
-                if (response.data.authorized === true){
+				console.log(response);
+                if (response.data.status === 'sukses'){
                     return this.setState({ redir: true });
                 }
                 else {

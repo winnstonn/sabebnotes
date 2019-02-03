@@ -1,6 +1,6 @@
-const userExistInDatabase = (username, password, db) => {
+const userExistInDatabase = async (username, password, db, res) => {
 	var query = {'username': username, 'password': password};
-	db.collection("User").findOne(query, function(err, result) {
+	return db.collection("User").findOne(query, function(err, result) {
     if (err) {
 		throw err;
 	}
@@ -8,9 +8,15 @@ const userExistInDatabase = (username, password, db) => {
 		console.log(result);
         if (result !== null) {
 		    console.log("Found yes");
-            return true;
+            return res.json({
+						response: "200 OK",
+						data: 'sukses'
+					});
         } else {
-            return false;
+            return res.json({
+						response: "200 OK",
+						data: 'error'
+					});
         }
     }
   });
@@ -18,9 +24,6 @@ const userExistInDatabase = (username, password, db) => {
 
 module.exports = {
     login:(req, res, db) => {
-        if (userExistInDatabase(req.body.username, req.body.password, db) == true)
-            return res.json({response: '200 OK', authorized: true});
-        else
-            return res.json({response: '200 OK', authorized: false});
+        userExistInDatabase(req.body.username, req.body.password, db,res);
     }
 }
