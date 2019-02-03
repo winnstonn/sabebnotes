@@ -10,12 +10,12 @@ const userExistInDatabase = async (username, password, db, res) => {
 		    console.log("Found yes");
             return res.json({
 						response: "200 OK",
-						data: 'sukses'
+						authorized: 'success'
 					});
         } else {
             return res.json({
 						response: "200 OK",
-						data: 'error'
+						authorized: 'failed'
 					});
         }
     }

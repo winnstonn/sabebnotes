@@ -35,7 +35,7 @@ export default class Login extends React.Component {
         axios.post(apiUrl, user).then(
             response => {
 				console.log(response);
-                if (response.data.status === 'sukses'){
+                if (response.data.authorized === 'success'){
                     return this.setState({ redir: true });
                 }
                 else {
