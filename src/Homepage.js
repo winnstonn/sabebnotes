@@ -39,7 +39,7 @@ class Homepage extends React.Component {
 
 	handleInputNote(event) {
 		event.preventDefault();
-		const apiUrl = 'localhost:8000/api/insertNote';
+		const apiUrl = 'http://localhost:8000/api/insertNote';
 
 		if (!this.state.note) {
 		  return this.setState({ error: 'A note is required' });
@@ -84,7 +84,7 @@ class Homepage extends React.Component {
 				  backgroundColor: '#e55b5b',
 				  borderRadius: '5px',
 				  width: 'fit-content',
-				  margin: 'auto'
+				  margin:'auto' 
 
 			  }}
 			  >

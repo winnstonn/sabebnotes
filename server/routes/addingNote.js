@@ -5,12 +5,13 @@ const addNote = async (username, note, idNote, title, db) => {
 		throw err;
 	}
 	else {
-		var query = { $push: { "arrNote": obj }};
-		return db.collection("User").update({ 'username':username },query, function(err, res) {
+		var query = { $push: { "arrNote": [obj] }};
+		return db.collection("User").updateOne({ "username":username },query, function(err, res) {
 		if (err) {
 			throw err;
 		}
 		else {
+			console.log("Insert 1 note");
 			var jsonRes = getNote(username, db);
 			return res.json(jsonRes);
 		}
@@ -18,14 +19,14 @@ const addNote = async (username, note, idNote, title, db) => {
 	}
    });
 }
-const getNote = (username, db) => {
+const getNote = async (username, db) => {
 	return db.collection("User").find({'username':username}).toArray(function(err, result) {
     if (err) {
-		return {'respon':'Bad', 'res': null};
+		return {response:'Bad', res: 'error'};
     }
 	else {
 		console.log("Here are documents");
-		return {'respon': 'Good', 'res':result};
+		return {response: 'Good', res:result};
     }
   });
 }

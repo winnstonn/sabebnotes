@@ -5,9 +5,7 @@ const userExistInDatabase = async (username, password, db, res) => {
 		throw err;
 	}
 	else {
-		console.log(result);
         if (result !== null) {
-		    console.log("Found yes");
             return res.json({
 						response: "200 OK",
 						authorized: 'success'
