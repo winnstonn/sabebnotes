@@ -9,8 +9,8 @@ const signUpUser = async (fname, lname, username, password, addr, email, arrNote
 		"addr": addr,
 		"arrNote": arrNote
 	};
-	return db.collection("User").findOne(obj, function (err, result) {
-		console.log(res);
+	db.collection("User").findOne({"username":username}, function (err, result) {
+		console.log(result);
 		if (result === null) {
 			console.log('username is unique');
 			return db.collection("User").insertOne(obj, function (err, result) {
